@@ -1,10 +1,10 @@
 const mysql = require('mysql2/promise');
 
 const connection = mysql.createPool({
-  host: 'store_manager',
+  host: 'db',
   user: 'root',
   password: 'password',
-  database: 'db',
+  database: 'StoreManager',
   port: 3306
 })
 
