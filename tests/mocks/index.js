@@ -13,18 +13,16 @@ const mockAllProducts = [
   }
 ];
 
-const mockProductById = [
-  {
+const mockProductById = {
   "id": 1,
   "name": "Martelo de Thor"
-  }
-];
+};
 
-const mockProductNotFound = [
-  {
-	"message": "Product not found"
-  }
-];
+
+const mockProductNotFound = {
+  "message": "Product not found"
+};
+
 
 module.exports = {
   mockAllProducts,
