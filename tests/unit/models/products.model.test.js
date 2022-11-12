@@ -5,7 +5,6 @@ const connection = require('../../../src/models/db/connection');
 const productsModel = require('../../../src/models/products.model');
 
 const { mockAllProducts, mockProductById } = require('../../mocks');
-const { afterEach } = require('mocha');
 
 const ID_OK = 1;
 
