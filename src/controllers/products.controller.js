@@ -1,20 +1,21 @@
 const productsService = require('../services/products.service');
 
-const getAllProducts = async (_req, res) => {
-  const { type, products } = await productsService.getAllProducts();
+const STATUS_OK = 200;
+const STATUS_NOT_FOUND = 404;
 
-  if (!type) return res.status(type).json({ message: 'OK' });
+const getAllProducts = async (_req, res) => {
+  const response = await productsService.getAllProducts();
   
-  return res.status(type).send(products);
+  return res.status(STATUS_OK).send(response);
 };
 
 const getProductById = async (req, res) => {
   const { id } = req.params;
-  const { type, productById, message } = await productsService.getProductById(id);
+  const response = await productsService.getProductById(id);
 
-  if (type !== 200) return res.status(type).json({ message });
+  if (!response) return res.status(STATUS_NOT_FOUND).json({ message: 'Product not found' });
 
-  return res.status(type).send(productById);
+  return res.status(STATUS_OK).send(response);
 };
 
 module.exports = {
