@@ -6,7 +6,7 @@ const STATUS_NOT_FOUND = 404;
 const getAllProducts = async (_req, res) => {
   const response = await productsService.getAllProducts();
   
-  return res.status(STATUS_OK).send(response);
+  return res.status(STATUS_OK).json(response);
 };
 
 const getProductById = async (req, res) => {
@@ -15,7 +15,7 @@ const getProductById = async (req, res) => {
 
   if (!response) return res.status(STATUS_NOT_FOUND).json({ message: 'Product not found' });
 
-  return res.status(STATUS_OK).send(response);
+  return res.status(STATUS_OK).json(response);
 };
 
 module.exports = {

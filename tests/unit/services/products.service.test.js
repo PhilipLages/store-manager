@@ -5,7 +5,6 @@ const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 
 const { mockAllProducts, mockProductById } = require('../../mocks');
-const { afterEach } = require('mocha');
 
 const ID_OK = 1;
 const NOT_FOUND_ID = 100;
