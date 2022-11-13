@@ -23,9 +23,15 @@ const mockProductNotFound = {
   "message": "Product not found"
 };
 
+const mockNewProduct = {
+  "id": 4,
+  "name": "ProductX"
+}
+
 
 module.exports = {
   mockAllProducts,
   mockProductById,
   mockProductNotFound,
+  mockNewProduct,
 };

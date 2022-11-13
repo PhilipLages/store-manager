@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 
-const { mockAllProducts, mockProductById } = require('../../mocks');
+const { mockAllProducts, mockProductById, mockNewProduct } = require('../../mocks');
 
 const ID_OK = 1;
 const NOT_FOUND_ID = 100;
@@ -35,4 +35,14 @@ describe('Products Service Layer', function () {
 
     expect(result).to.be.deep.equal(null);
   });
+
+  it('should create a new product', async function () {    
+    sinon.stub(productsModel, 'createNewProduct').resolves(mockNewProduct);
+
+    const NEW_PRODUCT = { name: 'ProductX' };
+    
+    const result = await productsService.createNewProduct(NEW_PRODUCT);
+
+    expect(result.id).to.be.deep.equal(mockNewProduct);
+  })
 });
