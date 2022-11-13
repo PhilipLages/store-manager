@@ -8,6 +8,8 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
+app.use(express.json());
+
 app.use('/products', productsRouter);
 
 // não remova essa exportação, é para o avaliador funcionar
