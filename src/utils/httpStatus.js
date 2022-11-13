@@ -9,5 +9,5 @@ module.exports = {
   CREATED,
   REQUIRED,
   NOT_FOUND,
-  UNPROC_ENTITY
-}
+  UNPROC_ENTITY,
+};

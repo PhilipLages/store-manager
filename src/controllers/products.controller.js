@@ -22,7 +22,7 @@ const createNewProduct = async (req, res) => {
   const result = await productsService.createNewProduct(product);
 
   return res.status(httpStatus.CREATED).json(result);
-}
+};
 
 module.exports = {
   getAllProducts,

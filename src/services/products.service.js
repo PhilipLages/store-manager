@@ -19,8 +19,8 @@ const createNewProduct = async (product) => {
 
   const products = await getAllProducts();
 
-  return products[products.length -1];
-}
+  return products[products.length - 1];
+};
 
 module.exports = {
   getAllProducts,
