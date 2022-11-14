@@ -8,7 +8,7 @@ const validProduct = Joi.object({
   'string.min': '{#label} length must be at least {#limit} characters long',
 });
 
-const validateProduct = async (req, res, next) => {
+const validateProduct = (req, res, next) => {
   const product = req.body;
 
   const { error } = validProduct.validate(product);
