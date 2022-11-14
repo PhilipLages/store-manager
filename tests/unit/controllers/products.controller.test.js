@@ -8,10 +8,9 @@ chai.use(sinonChai);
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
 
-const { mockAllProducts, mockProductById, mockProductNotFound } = require('../../mocks');
+const { mockAllProducts, mockProductById, mockProductNotFound, mockNewProduct } = require('../../mocks');
+const httpStatus = require('../../../src/utils/httpStatus');
 
-const STATUS_OK = 200;
-const STATUS_NOT_FOUND = 404;
 
 describe('Products Controller Layer', function () {
   afterEach(sinon.restore);
@@ -26,7 +25,7 @@ describe('Products Controller Layer', function () {
 
     await productsController.getAllProducts({}, res);
 
-    expect(res.status).to.have.been.calledWith(STATUS_OK);
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
     expect(res.json).to.have.been.calledWith(mockAllProducts);
   });
 
@@ -41,12 +40,12 @@ describe('Products Controller Layer', function () {
 
     await productsController.getProductById(req, res);
 
-    expect(res.status).to.have.been.calledWith(STATUS_OK);
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
     expect(res.json).to.have.been.calledWith([mockProductById]);
   });
 
   it('should return a error message if no product is found', async function () {
-    sinon.stub(productsService, 'getProductById').resolves([mockProductNotFound]);
+    sinon.stub(productsService, 'getProductById').resolves(mockProductNotFound);
 
     const res = {};
     const req = { params: { id: 100 } };
@@ -56,7 +55,45 @@ describe('Products Controller Layer', function () {
 
     await productsController.getProductById(req, res);
 
-    // expect(res.status).to.have.been.calledWith(STATUS_NOT_FOUND);
-    expect(res.json).to.have.been.calledWith([mockProductNotFound]);
+    // expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockProductNotFound);
+  });
+
+  it('should be able to create a new product', async function () {
+    sinon.stub(productsService, 'createNewProduct').resolves(mockNewProduct);
+
+    const res = {};
+    const req = {
+      body: {
+        name: 'ProductX',
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.createNewProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.CREATED);
+    expect(res.json).to.have.been.calledWith(mockNewProduct);
+  });
+
+    it('should be able to return an error message', async function () {
+    sinon.stub(productsService, 'createNewProduct').resolves(mockNewProduct);
+
+    const res = {};
+    const req = {
+      body: {
+        name: 'ProductX',
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.createNewProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.CREATED);
+    expect(res.json).to.have.been.calledWith(mockNewProduct);
   });
 });
