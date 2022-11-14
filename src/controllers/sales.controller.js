@@ -2,7 +2,7 @@ const salesService = require('../services/sales.service');
 const httpStatus = require('../utils/httpStatus');
 
 const createNewSales = async (req, res) => {
-  const sales= req.body;
+  const sales = req.body;
 
   const result = await salesService.createNewSales(sales);
 

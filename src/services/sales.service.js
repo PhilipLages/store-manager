@@ -1,9 +1,9 @@
 const salesModel = require('../models/sales.model');
+const productsModel = require('../models/products.model');
 
 const createNewSales = async (sales) => {
-  const result = await Promise.all(sales.map(async (sale) => {
-    salesModel.createNewSales(sale);
-  }));
+  
+  const result = await salesModel.createNewSales(sales);
 
   return { id: result, itemsSold: [...sales] };
 };
