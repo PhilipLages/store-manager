@@ -1,3 +1,13 @@
-// const salesModel = require('../models/sales.model');
+const salesModel = require('../models/sales.model');
 
-// const create
+const createNewSales = async (sales) => {
+  const result = await Promise.all(sales.map(async (sale) => {
+    salesModel.createNewSales(sale);
+  }));
+
+  return { id: result, itemsSold: [...sales] };
+};
+
+module.exports = {
+  createNewSales,
+};
