@@ -16,7 +16,7 @@ describe('Products Model Layer', function () {
   afterEach(sinon.restore);
 
   it('should list all products', async function () {
-    // sinon.stub(connection, 'execute').resolves(mockAllProducts);
+    sinon.stub(connection, 'execute').resolves(mockAllProducts);
 
     const result = await productsModel.getAllProducts();
 

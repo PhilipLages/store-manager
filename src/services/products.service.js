@@ -1,15 +1,15 @@
 const productsModel = require('../models/products.model');
 
 const getAllProducts = async () => {
-  const response = await productsModel.getAllProducts();
+  const [response] = await productsModel.getAllProducts();
 
   return response;
 };
 
 const getProductById = async (id) => {
-  const [response] = await productsModel.getProductById(id);
+  const response = await productsModel.getProductById(id);
 
-  if (!response) return null;
+  if (response && !response.length) return null;
   
   return response;
 };

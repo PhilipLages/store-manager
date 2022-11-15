@@ -46,11 +46,11 @@ describe('Products Controller Layer', function () {
     await productsController.getProductById(req, res);
 
     expect(res.status).to.have.been.calledWith(httpStatus.OK);
-    expect(res.json).to.have.been.calledWith([mockProductById]);
+    expect(res.json).to.have.been.calledWith(mockProductById);
   });
 
   it('should return a error message if no product is found', async function () {
-    sinon.stub(productsService, 'getProductById').resolves(mockProductNotFound);
+    sinon.stub(productsService, 'getProductById').resolves([mockProductNotFound]);
 
     const res = {};
     const req = { params: { id: 100 } };

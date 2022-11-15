@@ -34,6 +34,40 @@ const validSaleMock = {
   ]
 };
 
+const mockAllSales = [
+	{
+		"saleId": 1,
+		"date": "2022-11-15T17:41:51.000Z",
+		"productId": 1,
+		"quantity": 5
+	},
+	{
+		"saleId": 1,
+		"date": "2022-11-15T17:41:51.000Z",
+		"productId": 2,
+		"quantity": 10
+	},
+	{
+		"saleId": 2,
+		"date": "2022-11-15T17:41:51.000Z",
+		"productId": 3,
+		"quantity": 15
+	}
+]
+
+const mockSaleById = [
+  {
+    "date": "2022-11-15T17:41:51.000Z",
+    "productId": 1,
+    "quantity": 5
+  },
+  {
+    "date": "2022-11-15T17:41:51.000Z",
+    "productId": 2,
+    "quantity": 10
+  }
+];
+
 const mockProductNotFound = {
   "message": "Product not found"
 };
@@ -42,5 +76,7 @@ module.exports = {
   saleTest,
   invalidSaleTest,
   validSaleMock,
+  mockAllSales,
+  mockSaleById,
   mockProductNotFound,
 };

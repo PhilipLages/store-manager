@@ -9,7 +9,11 @@ const {
   saleTest,
   invalidSaleTest,
   validSaleMock,
+  mockSaleById,
+  mockAllSales,
 } = require('../../mocks/sales.mocks');
+
+const ID_OK = 1;
 
 describe('Sales Service Layer', function () {
   afterEach(sinon.restore);
@@ -30,19 +34,19 @@ describe('Sales Service Layer', function () {
     expect(result).to.be.deep.equal(null);
   });
 
-  // it('should list all sales', async function () {
-  //   sinon.stub(salesModel, 'getAllsales').resolves(mockAllsales);
+  it('should list all sales', async function () {
+    sinon.stub(salesModel, 'getAllSales').resolves(mockAllSales);
 
-  //   const result = await salesService.getAllsales();
+    const result = await salesService.getAllSales();
 
-  //   expect(result).to.be.deep.equal(mockAllsales);
-  // });
+    expect(result).to.be.deep.equal(mockAllSales);
+  });
 
-  // it('should list a product searched by id', async function () {
-  //   sinon.stub(salesModel, 'getProductById').resolves([mockProductById]);
+  it('should list a sale searched by id', async function () {
+    sinon.stub(salesModel, 'getSaleById').resolves(mockSaleById);
 
-  //   const result = await salesService.getProductById(ID_OK);
+    const result = await salesService.getSaleById(ID_OK);
 
-  //   expect(result).to.be.deep.equal(mockProductById);
-  // });
+    expect(result).to.be.deep.equal(mockSaleById);
+  });
 });

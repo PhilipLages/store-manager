@@ -11,11 +11,11 @@ const getProductById = async (req, res) => {
   const { id } = req.params;
   const response = await productsService.getProductById(id);
 
-  if (response === null) {
+  if (!response) {
     return res.status(httpStatus.NOT_FOUND).json({ message: 'Product not found' });
   } 
 
-  return res.status(httpStatus.OK).json(response);
+  return res.status(httpStatus.OK).json(response[0]);
 };
 
 const createNewProduct = async (req, res) => {

@@ -19,7 +19,7 @@ const createNewSale = async (sales) => {
 };
 
 const getAllSales = async () => {
-  const [result] = await connection.execute(
+  const result = await connection.execute(
   `${querys.SELECT} 
     ${querys.SALE_ID}  
     ${querys.SALE_DATE}
@@ -32,7 +32,7 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (id) => {
-  const [result] = await connection.execute(
+  const result = await connection.execute(
   `${querys.SELECT} 
     ${querys.SALE_DATE}
     ${querys.PRODUCTS} 
