@@ -108,7 +108,7 @@ describe('Products Controller Layer', function () {
 
     const res = {};
       const req = {
-      params: { id: 100 },
+      params: { id: 1 },
       body: {
         name: 'Martelo do Batman',
       },
@@ -121,5 +121,25 @@ describe('Products Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.OK);
     expect(res.json).to.have.been.calledWith(mockUpdatedProduct);
+    });
+  
+      it('updates a product searched by id', async function () {
+    sinon.stub(productsService, 'updateProduct').resolves(null);
+
+    const res = {};
+      const req = {
+      params: { id: 100 },
+      body: {
+        name: 'Martelo do Batman',
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.updateProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockProductNotFound);
   });
 });
