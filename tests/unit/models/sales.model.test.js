@@ -34,4 +34,12 @@ describe('Sales Model Layer', function () {
 
     expect(result).to.be.equal(mockSaleById);
   });
+
+  it('should delete a sale searched by id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    
+    const result = await salesModel.deleteSale(ID_OK);
+
+    expect(result).to.be.equal(1);
+  });
 });

@@ -49,4 +49,12 @@ describe('Sales Service Layer', function () {
 
     expect(result).to.be.deep.equal(mockSaleById);
   });
+
+  it('deletes a sale searched by id', async function () {
+    sinon.stub(salesModel, 'deleteSale').resolves(1);
+
+    const result = await salesService.deleteSale(ID_OK);
+
+    expect(result).to.be.deep.equal({ status: 204 });
+  });
 });

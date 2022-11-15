@@ -44,7 +44,7 @@ const deleteSale = async (id) => {
   await salesModel.deleteSale(id);
 
   return { status: 204 };
-}
+};
 
 module.exports = {
   createNewSale,
