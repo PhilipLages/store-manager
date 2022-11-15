@@ -123,11 +123,11 @@ describe('Products Controller Layer', function () {
     expect(res.json).to.have.been.calledWith(mockUpdatedProduct);
     });
   
-      it('updates a product searched by id', async function () {
+    it('updates a product searched by id', async function () {
     sinon.stub(productsService, 'updateProduct').resolves(null);
 
     const res = {};
-      const req = {
+    const req = {
       params: { id: 100 },
       body: {
         name: 'Martelo do Batman',
@@ -138,6 +138,35 @@ describe('Products Controller Layer', function () {
     res.json = sinon.stub().returns();
 
     await productsController.updateProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockProductNotFound);
+    });
+  
+    it('deletes a product searched by id', async function () {
+    sinon.stub(productsService, 'deleteProduct').resolves({ status: 204 });
+
+    const res = {};
+    const req = { params: { id: 1 } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.deleteProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.DELETED);
+    });
+  
+    it('returns an message if no product if found while deleting', async function () {
+    sinon.stub(productsService, 'deleteProduct').resolves(null);
+
+    const res = {};
+    const req = { params: { id: 100 } }
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.deleteProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
     expect(res.json).to.have.been.calledWith(mockProductNotFound);

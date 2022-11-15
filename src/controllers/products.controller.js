@@ -48,7 +48,7 @@ const deleteProduct = async (req, res) => {
     return res.status(httpStatus.NOT_FOUND).json({ message: 'Product not found' });
   }
 
-  return res.status(httpStatus.DELETED).end();
+  return res.status(httpStatus.DELETED).json();
 };
 
 module.exports = {
