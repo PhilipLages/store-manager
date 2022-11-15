@@ -1,5 +1,6 @@
 const connection = require('./db/connection');
 const getDate = require('../utils/date');
+const querys = require('../utils/querys');
 
 const createNewSale = async (sales) => {
   const date = getDate();
@@ -19,30 +20,15 @@ const createNewSale = async (sales) => {
 
 const getAllSales = async () => {
   const [result] = await connection.execute(
-    `SELECT 
-        sales.id AS saleId,
-        sales.${`date`},
-        products.product_id AS productId,
-        products.quantity
-      FROM StoreManager.sales AS sales
-      INNER JOIN StoreManager.sales_products AS products
-	      ON sales.id = products.sale_id`
+    `${querys.SELECT} ${querys.FROM} ${querys.INNER_JOIN} ${querys.ON}`,
   );
-
   return result;
 };
 
 const getSaleById = async (id) => {
   const [result] = await connection.execute(
-    `SELECT 
-        sales.id AS saleId,
-        sales.${`date`},
-        products.product_id AS productId,
-        products.quantity
-      FROM StoreManager.sales AS sales
-      INNER JOIN StoreManager.sales_products AS products
-	      ON sales.id = products.sale_id
-      WHERE sales.id = ?`, [id],
+    `${querys.SELECT} ${querys.FROM} ${querys.INNER_JOIN} ${querys.ON} ${querys.WHERE}`,
+    [id],
   );
 
   return result;
