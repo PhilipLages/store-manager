@@ -13,6 +13,13 @@ const createNewSale = async (req, res) => {
   return res.status(httpStatus.CREATED).json(result);
 };
 
+const getAllSales = async (_req, res) => {
+  const result = await salesService.getAllSales();
+
+  return res.status(httpStatus.OK).json(result);
+};
+
 module.exports = {
   createNewSale,
+  getAllSales,
 };
