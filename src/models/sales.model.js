@@ -61,7 +61,7 @@ const deleteSale = async (id) => {
 const updateSale = async (id, sales) => {
   const date = getDate();
   const [{ affectedRows }] = await connection.execute(
-    'INSERT INTO StoreManager.sales (date) VALUES (?)', [date],    
+    'UPDATE StoreManager.sales SET date = (?) WHERE id = (?)', [date, id],    
   );
 
   await Promise.all(sales.map(async ({ productId, quantity }) => {

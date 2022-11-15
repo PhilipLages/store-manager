@@ -4,7 +4,12 @@ const { expect } = require('chai');
 const connection = require('../../../src/models/db/connection');
 const salesModel = require('../../../src/models/sales.model');
 
-const { saleTest, mockAllSales, mockSaleById } = require('../../mocks/sales.mocks');
+const {
+  saleTest,
+  mockAllSales,
+  mockSaleById,
+  updateSaleTest
+} = require('../../mocks/sales.mocks');
 
 const ID_OK = 1;
 
@@ -39,6 +44,14 @@ describe('Sales Model Layer', function () {
     sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
     
     const result = await salesModel.deleteSale(ID_OK);
+
+    expect(result).to.be.equal(1);
+  });
+
+  it('updates a sale searched by id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const result = await salesModel.updateSale(ID_OK, updateSaleTest);
 
     expect(result).to.be.equal(1);
   });

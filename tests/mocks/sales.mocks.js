@@ -9,6 +9,17 @@ const saleTest = [
   }
 ];
 
+const updateSaleTest = [
+  {
+    "productId": 1,
+    "quantity": 10
+  },
+  {
+    "productId": 2,
+    "quantity": 50
+  }
+];
+
 const invalidSaleTest = [
   {
     "productId": 100,
@@ -72,11 +83,27 @@ const mockSaleNotFound = {
   "message": "Sale not found"
 };
 
+const mockUpdatedSale = {
+  "saleId": 1,
+  "itemsUpdated": [
+    {
+      "productId": 1,
+      "quantity": 10
+    },
+    {
+      "productId": 2,
+      "quantity": 50
+    }
+  ]
+};
+
 module.exports = {
   saleTest,
+  updateSaleTest,
   invalidSaleTest,
   validSaleMock,
   mockAllSales,
   mockSaleById,
   mockSaleNotFound,
+  mockUpdatedSale,
 };
