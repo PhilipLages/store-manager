@@ -20,14 +20,26 @@ const createNewSale = async (sales) => {
 
 const getAllSales = async () => {
   const [result] = await connection.execute(
-    `${querys.SELECT} ${querys.FROM} ${querys.INNER_JOIN} ${querys.ON}`,
+  `${querys.SELECT} 
+    ${querys.SALE_ID}  
+    ${querys.SALE_DATE}
+    ${querys.PRODUCTS} 
+    ${querys.FROM} 
+    ${querys.INNER_JOIN} 
+    ${querys.ON}`,
   );
   return result;
 };
 
 const getSaleById = async (id) => {
   const [result] = await connection.execute(
-    `${querys.SELECT} ${querys.FROM} ${querys.INNER_JOIN} ${querys.ON} ${querys.WHERE}`,
+  `${querys.SELECT} 
+    ${querys.SALE_DATE}
+    ${querys.PRODUCTS} 
+    ${querys.FROM} 
+    ${querys.INNER_JOIN} 
+    ${querys.ON}
+    ${querys.WHERE}`,
     [id],
   );
 

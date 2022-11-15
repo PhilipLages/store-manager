@@ -29,9 +29,9 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (id) => {
-  const [result] = await salesModel.getSaleById(id);
+  const result = await salesModel.getSaleById(id);
 
-  if (!result) return null;
+  if (!result.length) return null;
 
   return result;
 };
