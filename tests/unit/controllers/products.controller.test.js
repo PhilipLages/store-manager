@@ -12,7 +12,8 @@ const {
   mockAllProducts,
   mockProductById,
   mockProductNotFound,
-  mockNewProduct
+  mockNewProduct,
+  mockUpdatedProduct
 } = require('../../mocks/products.mocks');
 
 const httpStatus = require('../../../src/utils/httpStatus');
@@ -100,5 +101,25 @@ describe('Products Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.CREATED);
     expect(res.json).to.have.been.calledWith(mockNewProduct);
+    });
+  
+    it('updates a product searched by id', async function () {
+    sinon.stub(productsService, 'updateProduct').resolves(mockUpdatedProduct);
+
+    const res = {};
+      const req = {
+      params: { id: 100 },
+      body: {
+        name: 'Martelo do Batman',
+      },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productsController.updateProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
+    expect(res.json).to.have.been.calledWith(mockUpdatedProduct);
   });
 });

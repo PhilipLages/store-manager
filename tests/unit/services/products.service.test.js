@@ -8,6 +8,7 @@ const {
   mockAllProducts,
   mockProductById,
   mockNewProduct,
+  mockUpdatedProduct,
 } = require('../../mocks/products.mocks');
 
 const ID_OK = 1;
@@ -48,5 +49,15 @@ describe('Products Service Layer', function () {
     const result = await productsService.createNewProduct(NEW_PRODUCT);
 
     expect(result.id).to.be.deep.equal(mockNewProduct);
+  });
+
+  it('updates a product name searched by id', async function () {
+    sinon.stub(productsModel, 'updateProduct').resolves(mockUpdatedProduct);
+
+    const UPDATED_NAME = 'Martelo do Batman';
+
+    const result = await productsService.updateProduct(ID_OK, UPDATED_NAME);
+
+    expect(result).to.be.deep.equal(mockUpdatedProduct);
   });
 });

@@ -28,10 +28,16 @@ const mockNewProduct = {
   "name": "ProductX"
 }
 
+const mockUpdatedProduct = {
+  "id": 1,
+  "name": "Martelo do Batman"
+};
+
 
 module.exports = {
   mockAllProducts,
   mockProductById,
   mockProductNotFound,
   mockNewProduct,
+  mockUpdatedProduct,
 };

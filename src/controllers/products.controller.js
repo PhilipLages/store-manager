@@ -27,8 +27,8 @@ const createNewProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const { name } = req.body;
   const { id } = req.params;
+  const { name } = req.body;
 
   const result = await productsService.updateProduct(id, name);
 
@@ -36,7 +36,7 @@ const updateProduct = async (req, res) => {
     return res.status(httpStatus.NOT_FOUND).json({ message: 'Product not found' });
   } 
 
-  return res.status(httpStatus.OK).json({ id: result, name });
+  return res.status(httpStatus.OK).json(result);
 };
 
 module.exports = {
