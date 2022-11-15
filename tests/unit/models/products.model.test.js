@@ -47,4 +47,12 @@ describe('Products Model Layer', function () {
 
     expect(result).to.be.equal(1);
   });
+
+  it('should delete a product searched by id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    
+    const result = await productsModel.deleteProduct(ID_OK);
+
+    expect(result).to.be.equal(1);
+  });
 });

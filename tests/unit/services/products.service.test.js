@@ -60,4 +60,12 @@ describe('Products Service Layer', function () {
 
     expect(result).to.be.deep.equal(mockUpdatedProduct);
   });
+
+  it('deletes a product searched by id', async function () {
+    sinon.stub(productsModel, 'deleteProduct').resolves(1);
+
+    const result = await productsService.deleteProduct(ID_OK);
+
+    expect(result).to.be.deep.equal({ status: 204 });
+  });
 });
