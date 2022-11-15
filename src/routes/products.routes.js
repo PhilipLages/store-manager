@@ -4,6 +4,7 @@ const { validateProduct } = require('../middlewares/products.middlewares');
 
 const productsRouter = express.Router();
 
+productsRouter.get('/search', productsController.searchProducts);
 productsRouter.get('/:id', productsController.getProductById);
 productsRouter.put('/:id', validateProduct, productsController.updateProduct);
 productsRouter.delete('/:id', productsController.deleteProduct);
