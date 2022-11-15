@@ -15,6 +15,8 @@ const {
   mockAllSales,
   mockSaleById,
   mockSaleNotFound,
+  mockUpdatedSale,
+  updateSaleTest,
 } = require('../../mocks/sales.mocks');
 
 const httpStatus = require('../../../src/utils/httpStatus');
@@ -124,5 +126,23 @@ describe('Sales Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
     expect(res.json).to.have.been.calledWith(mockSaleNotFound);
+  });
+
+  it('updates a sale searched by id', async function () {
+    sinon.stub(salesService, 'updateSale').resolves(mockUpdatedSale);
+
+    const res = {};
+    const req = {
+      params: { id: 1 },
+      body: updateSaleTest
+    };
+    
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesController.updateSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
+    expect(res.json).to.have.been.calledWith(mockUpdatedSale);
   });
 });

@@ -123,7 +123,7 @@ describe('Products Controller Layer', function () {
     expect(res.json).to.have.been.calledWith(mockUpdatedProduct);
   });
   
-    it('updates a product searched by id', async function () {
+    it('returns an error message if no product is found while updating', async function () {
     sinon.stub(productsService, 'updateProduct').resolves(null);
 
     const res = {};
