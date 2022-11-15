@@ -11,6 +11,8 @@ const {
   validSaleMock,
   mockSaleById,
   mockAllSales,
+  mockUpdatedSale,
+  updateSaleTest,
 } = require('../../mocks/sales.mocks');
 
 const ID_OK = 1;
@@ -56,5 +58,13 @@ describe('Sales Service Layer', function () {
     const result = await salesService.deleteSale(ID_OK);
 
     expect(result).to.be.deep.equal({ status: 204 });
+  });
+
+  it('updates a sale searched by id', async function () {
+    sinon.stub(salesModel, 'updateSale').resolves(1);
+
+    const result = await salesService.updateSale(ID_OK, updateSaleTest);
+
+    expect(result).to.be.deep.equal(mockUpdatedSale);
   });
 });
