@@ -34,8 +34,13 @@ const validSaleMock = {
   ]
 };
 
+const mockProductNotFound = {
+  "message": "Product not found"
+};
+
 module.exports = {
   saleTest,
   invalidSaleTest,
   validSaleMock,
+  mockProductNotFound,
 };
