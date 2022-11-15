@@ -2,7 +2,7 @@ const salesModel = require('../models/sales.model');
 const checkProductId = require('../utils/checkProductId');
 
 const createNewSale = async (sales) => {   
-  const nonexistent = checkProductId(sales);
+  const nonexistent = await checkProductId(sales);
 
   if (nonexistent.length > 0) {
     return null;
