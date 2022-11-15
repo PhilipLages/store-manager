@@ -96,4 +96,33 @@ describe('Sales Controller Layer', function () {
     expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
     expect(res.json).to.have.been.calledWith(mockSaleNotFound);
   });
+
+  it('deletes a sale searched by id', async function () {
+    sinon.stub(salesService, 'deleteSale').resolves({ status: 204 });
+
+    const res = {};
+    const req = { params: { id: 1 } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesController.deleteSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.DELETED);
+  });
+
+  it('returns an message if no sale if found while deleting', async function () {
+    sinon.stub(salesService, 'deleteSale').resolves(null);
+
+    const res = {};
+    const req = { params: { id: 100 } }
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesController.deleteSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockSaleNotFound);
+  });
 });

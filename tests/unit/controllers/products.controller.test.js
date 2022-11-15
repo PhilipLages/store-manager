@@ -101,7 +101,7 @@ describe('Products Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.CREATED);
     expect(res.json).to.have.been.calledWith(mockNewProduct);
-    });
+  });
   
     it('updates a product searched by id', async function () {
     sinon.stub(productsService, 'updateProduct').resolves(mockUpdatedProduct);
@@ -121,7 +121,7 @@ describe('Products Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.OK);
     expect(res.json).to.have.been.calledWith(mockUpdatedProduct);
-    });
+  });
   
     it('updates a product searched by id', async function () {
     sinon.stub(productsService, 'updateProduct').resolves(null);
@@ -141,7 +141,7 @@ describe('Products Controller Layer', function () {
 
     expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
     expect(res.json).to.have.been.calledWith(mockProductNotFound);
-    });
+  });
   
     it('deletes a product searched by id', async function () {
     sinon.stub(productsService, 'deleteProduct').resolves({ status: 204 });
@@ -155,9 +155,9 @@ describe('Products Controller Layer', function () {
     await productsController.deleteProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(httpStatus.DELETED);
-    });
+  });
   
-    it('returns an message if no product if found while deleting', async function () {
+  it('returns an message if no product if found while deleting', async function () {
     sinon.stub(productsService, 'deleteProduct').resolves(null);
 
     const res = {};
