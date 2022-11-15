@@ -4,7 +4,11 @@ const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 
-const { mockAllProducts, mockProductById, mockNewProduct } = require('../../mocks');
+const {
+  mockAllProducts,
+  mockProductById,
+  mockNewProduct,
+} = require('../../mocks/products.mocks');
 
 const ID_OK = 1;
 const NOT_FOUND_ID = 100;

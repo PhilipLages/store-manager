@@ -8,9 +8,14 @@ chai.use(sinonChai);
 const productsService = require('../../../src/services/products.service');
 const productsController = require('../../../src/controllers/products.controller');
 
-const { mockAllProducts, mockProductById, mockProductNotFound, mockNewProduct } = require('../../mocks');
-const httpStatus = require('../../../src/utils/httpStatus');
+const {
+  mockAllProducts,
+  mockProductById,
+  mockProductNotFound,
+  mockNewProduct
+} = require('../../mocks/products.mocks');
 
+const httpStatus = require('../../../src/utils/httpStatus');
 
 describe('Products Controller Layer', function () {
   afterEach(sinon.restore);
