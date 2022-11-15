@@ -11,6 +11,7 @@ const {
 
 const ID_OK = 1;
 const PRODUCT_NAME = 'ProductX';
+const UPDATED_NAME = 'Martelo do Batman';
 
 describe('Products Model Layer', function () {
   afterEach(sinon.restore);
@@ -37,5 +38,13 @@ describe('Products Model Layer', function () {
     const result = await productsModel.createNewProduct({ PRODUCT_NAME });
 
     expect(result).to.be.equal(4);
+  });
+
+  it('should update a product searched by id', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    
+    const result = await productsModel.updateProduct(ID_OK, UPDATED_NAME);
+
+    expect(result).to.be.equal(1);
   });
 });
