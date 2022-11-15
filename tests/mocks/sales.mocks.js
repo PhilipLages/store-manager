@@ -68,8 +68,8 @@ const mockSaleById = [
   }
 ];
 
-const mockProductNotFound = {
-  "message": "Product not found"
+const mockSaleNotFound = {
+  "message": "Sale not found"
 };
 
 module.exports = {
@@ -78,5 +78,5 @@ module.exports = {
   validSaleMock,
   mockAllSales,
   mockSaleById,
-  mockProductNotFound,
+  mockSaleNotFound,
 };

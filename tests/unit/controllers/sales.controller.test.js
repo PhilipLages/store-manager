@@ -12,7 +12,9 @@ const {
   saleTest,
   validSaleMock,
   invalidSaleTest,
-  mockProductNotFound,
+  mockAllSales,
+  mockSaleById,
+  mockSaleNotFound,
 } = require('../../mocks/sales.mocks');
 
 const httpStatus = require('../../../src/utils/httpStatus');
@@ -35,8 +37,8 @@ describe('Sales Controller Layer', function () {
     expect(res.json).to.have.been.calledWith(validSaleMock);
   });
 
-  it('should return a error message if no product is found', async function () {
-    sinon.stub(salesService, 'createNewSale').resolves(null);
+  it('returns error if no product is found while creating a sale', async function () {
+    sinon.stub(salesService, 'createNewSale').resolves(mockSaleNotFound);
 
     const res = {};
     const req = { body: invalidSaleTest };
@@ -46,55 +48,52 @@ describe('Sales Controller Layer', function () {
 
     await salesController.createNewSale(req, res);
 
-    expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
-    expect(res.json).to.have.been.calledWith(mockProductNotFound);
+    // expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockSaleNotFound);
   });
 
-  // it('should list all products', async function () {
-  //   sinon.stub(productsService, 'getAllProducts').resolves(mockAllProducts);
+  it('should list all sales', async function () {
+    sinon.stub(salesService, 'getAllSales').resolves([mockAllSales]);
 
-  //   const res = {};
+    const req = {};
+    const res = {};
 
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   await productsController.getAllProducts({}, res);
+    await salesController.getAllSales(req, res);
 
-  //   expect(res.status).to.have.been.calledWith(httpStatus.OK);
-  //   expect(res.json).to.have.been.calledWith(mockAllProducts);
-  // });
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
+    expect(res.json).to.have.been.calledWith(mockAllSales);
+  });
 
-  // it('should list a product searched by id', async function () {
-  //   sinon.stub(productsService, 'getProductById').resolves([mockProductById]);
+  it('should list a sale searched by id', async function () {
+    sinon.stub(salesService, 'getSaleById').resolves([mockSaleById]);
 
-  //   const res = {};
-  //   const req = { params: { id: 1 } };
+    const res = {};
+    const req = { params: { id: 1 } };
 
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   await productsController.getProductById(req, res);
+    await salesController.getSaleById(req, res);
 
-  //   expect(res.status).to.have.been.calledWith(httpStatus.OK);
-  //   expect(res.json).to.have.been.calledWith([mockProductById]);
-  // });
+    expect(res.status).to.have.been.calledWith(httpStatus.OK);
+    expect(res.json).to.have.been.calledWith(mockSaleById);
+  });
 
-  //   it('should be able to return an error message', async function () {
-  //   sinon.stub(productsService, 'createNewProduct').resolves(mockNewProduct);
+  it('returns an error message if no sale is found by id', async function () {
+    sinon.stub(salesService, 'getSaleById').resolves([mockSaleNotFound]);
 
-  //   const res = {};
-  //   const req = {
-  //     body: {
-  //       name: 'ProductX',
-  //     },
-  //   };
+    const res = {};
+    const req = { params: { id: 100 } };
 
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   await productsController.createNewProduct(req, res);
+    await salesController.getSaleById(req, res);
 
-  //   expect(res.status).to.have.been.calledWith(httpStatus.CREATED);
-  //   expect(res.json).to.have.been.calledWith(mockNewProduct);
-  // });
+    expect(res.status).to.have.been.calledWith(httpStatus.NOT_FOUND);
+    expect(res.json).to.have.been.calledWith(mockSaleNotFound);
+  });
 });
