@@ -1,17 +1,8 @@
 const salesModel = require('../models/sales.model');
-const productsModel = require('../models/products.model');
+const checkProductId = require('../utils/checkProductId');
 
-const createNewSale = async (sales) => { 
-  const nonexistent = [];
-  await Promise.all(
-    sales.map(async ({ productId }) => {
-      const [product] = await productsModel.getProductById(productId);
-    
-      if (!product) nonexistent.push(product);
-
-      return [];
-    }),
-  );
+const createNewSale = async (sales) => {   
+  const nonexistent = checkProductId(sales);
 
   if (nonexistent.length > 0) {
     return null;
@@ -46,9 +37,26 @@ const deleteSale = async (id) => {
   return { status: 204 };
 };
 
+const updateSale = async (id, sales) => {
+  const [result] = await salesModel.getSaleById(id);
+
+  if (result && !result.length) return { message: 'Sale not found' };  
+
+  const nonexistent = await checkProductId(sales);
+
+  if (nonexistent.length > 0) {
+    return { message: 'Product not found' };
+  } 
+
+  await salesModel.updateSale(id, sales);
+
+  return { saleId: Number(id), itemsUpdated: sales };
+};
+
 module.exports = {
   createNewSale,
   getAllSales,
   getSaleById,
   deleteSale,
+  updateSale,
 };

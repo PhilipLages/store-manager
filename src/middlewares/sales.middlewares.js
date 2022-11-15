@@ -1,9 +1,9 @@
 const httpStatus = require('../utils/httpStatus');
 
 const validateId = (req, res, next) => {
-  const products = req.body;
+  const sales = req.body;
 
-  const isIdValid = products.every(({ productId }) => productId);
+  const isIdValid = sales.every(({ productId }) => productId);
 
   if (!isIdValid) {
     return res.status(httpStatus.REQUIRED).json({ message: '"productId" is required' });
@@ -13,12 +13,12 @@ const validateId = (req, res, next) => {
 };
 
 const validateQuantity = (req, res, next) => {
-  const products = req.body;
+  const sales = req.body;
 
-  const quantityExists = products.map(({ quantity }) => quantity)
+  const quantityExists = sales.map(({ quantity }) => quantity)
     .every((quantity) => quantity !== undefined);
   
-  const isQuantityValid = products.every(({ quantity }) => quantity >= 1);
+  const isQuantityValid = sales.every(({ quantity }) => quantity >= 1);
 
   if (!quantityExists) {
     return res.status(httpStatus.REQUIRED).json({ message: '"quantity" is required' });
